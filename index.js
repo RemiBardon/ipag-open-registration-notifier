@@ -6,6 +6,7 @@ const FORM_URL =
 const NOT_YET_OPEN_MESSAGE =
   "Les réservations  pour la saison 2024-2025 ouvriront sur cette page à la mi Novembre 2024";
 const SELECT_ELEMENT_ID = "#champ_selection_1";
+const PLACEHOLDER_OPTION_TEXT = "Plus aucune places disponible désolé";
 
 console.info(`Fetching '${FORM_URL}'…`);
 const response = await fetch(FORM_URL);
@@ -19,4 +20,7 @@ const dom = new JSDOM(content);
 const document = dom.window.document;
 
 const slots = document.querySelectorAll(`${SELECT_ELEMENT_ID} option`);
-console.log(`There are ${slots.length} slots available.`);
+const available_slots = Array.from(slots).filter(
+  (option) => option.textContent.trim() !== PLACEHOLDER_OPTION_TEXT,
+);
+console.log(`There are ${available_slots.length} slots available.`);
