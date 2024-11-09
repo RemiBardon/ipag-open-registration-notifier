@@ -30,23 +30,31 @@ const response = await fetch(FORM_URL);
 const content = await response.text();
 console.debug(`The page contains '${content.slice(0, 256)}[...]'`);
 
-const is_open = !content.includes(NOT_YET_OPEN_MESSAGE);
+let is_open = !content.includes(NOT_YET_OPEN_MESSAGE);
 console.log(`Registrations are open: ${is_open}`);
 
-const dom = new JSDOM(content);
-const document = dom.window.document;
+// If the warning message is still there, check the number of available slots.
+if (!is_open) {
+  const dom = new JSDOM(content);
+  const document = dom.window.document;
 
-const slots = document.querySelectorAll(`${SELECT_ELEMENT_ID} option`);
-const available_slots = Array.from(slots).filter(
-  (option) => option.textContent.trim() !== PLACEHOLDER_OPTION_TEXT,
-);
+  const slots = document.querySelectorAll(`${SELECT_ELEMENT_ID} option`);
+  const available_slots = Array.from(slots).filter(
+    (option) => option.textContent.trim() !== PLACEHOLDER_OPTION_TEXT,
+  );
 
-if (available_slots.length <= 0) {
-  console.log(`No slot available.`);
-  // Exit gracefully
+  if (available_slots.length <= 0) {
+    console.log(`No slot available.`);
+  } else {
+    console.log(`${available_slots.length} slot(s) available.`);
+  }
+
+  is_open = available_slots.length > 0;
+}
+
+// If registrations are not open, exit gracefully.
+if (!is_open) {
   process.exit(0);
-} else {
-  console.log(`${available_slots.length} slot(s) available.`);
 }
 
 // See [Node.js SDK Reference | Mailgun Developer Documentation](https://documentation.mailgun.com/docs/mailgun/sdk/nodejs_sdk/).
