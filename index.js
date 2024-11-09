@@ -25,10 +25,10 @@ const PLACEHOLDER_OPTION_TEXT = "Plus aucune places disponible désolé";
 const EMAIL_FROM = process.env.EMAIL_SENDER;
 const EMAIL_TO = process.env.EMAIL_RECIPIENTS.split(",");
 
-console.info(`Fetching '${FORM_URL}'…`);
+// console.info(`Fetching '${FORM_URL}'…`);
 const response = await fetch(FORM_URL);
 const content = await response.text();
-console.debug(`The page contains '${content.slice(0, 256)}[...]'`);
+// console.debug(`The page contains '${content.slice(0, 256)}[...]'`);
 
 let areRegistrationsOpen = !content.includes(NOT_YET_OPEN_MESSAGE);
 console.log(`Registrations are open: ${areRegistrationsOpen}`);
