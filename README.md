@@ -8,11 +8,11 @@ and crawl the page to check if some time slots have been added.
 [registration form]: https://ipag.osug.fr/french/grand-public/soirees-d-observation-du-ciel-en-hiver/formulaire-inscription-coupole-ipag/
 
 This project aims to be simple but pluridisciplinary to help a beginner discover multiple
-aspects of programming. It uses [JavaScript] as a language, [Vercel Cron Jobs] as a way
+aspects of programming. It uses [JavaScript] as a language, [`schedule`d GitHub Actions] as a way
 to periodically run the script and [Mailgun] to send notifications[^notif-options].
 
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
-[Vercel Cron Jobs]: https://vercel.com/docs/cron-jobs
+[`schedule`d GitHub Actions]: https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#schedule
 [Mailgun]: https://www.mailgun.com/
 
 [^notif-options]: We could have used [WhatsApp's Text Messages API](https://developers.facebook.com/docs/whatsapp/cloud-api/messages/text-messages) but it requires a Meta Business account and I don't want it.
