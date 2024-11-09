@@ -9,8 +9,10 @@ and crawl the page to check if some time slots have been added.
 
 This project aims to be simple but pluridisciplinary to help a beginner discover multiple
 aspects of programming. It uses [JavaScript] as a language, [Vercel Cron Jobs] as a way
-to periodically run the script and [WhatsApp's Text Messages API] to send notifications.
+to periodically run the script and [Mailgun] to send notifications[^notif-options].
 
 [JavaScript]: https://en.wikipedia.org/wiki/JavaScript
 [Vercel Cron Jobs]: https://vercel.com/docs/cron-jobs
-[WhatsApp's Text Messages API]: https://developers.facebook.com/docs/whatsapp/cloud-api/messages/text-messages
+[Mailgun]: https://www.mailgun.com/
+
+[^notif-options]: We could have used [WhatsApp's Text Messages API](https://developers.facebook.com/docs/whatsapp/cloud-api/messages/text-messages) but it requires a Meta Business account and I don't want it.
