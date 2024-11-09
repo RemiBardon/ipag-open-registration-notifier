@@ -23,4 +23,9 @@ const slots = document.querySelectorAll(`${SELECT_ELEMENT_ID} option`);
 const available_slots = Array.from(slots).filter(
   (option) => option.textContent.trim() !== PLACEHOLDER_OPTION_TEXT,
 );
-console.log(`There are ${available_slots.length} slots available.`);
+
+if (available_slots.length <= 0) {
+  console.log(`No slot available.`);
+} else {
+  console.log(`${available_slots.length} slot(s) available.`);
+}
