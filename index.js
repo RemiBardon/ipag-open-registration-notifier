@@ -30,30 +30,30 @@ const response = await fetch(FORM_URL);
 const content = await response.text();
 console.debug(`The page contains '${content.slice(0, 256)}[...]'`);
 
-let is_open = !content.includes(NOT_YET_OPEN_MESSAGE);
-console.log(`Registrations are open: ${is_open}`);
+let areRegistrationsOpen = !content.includes(NOT_YET_OPEN_MESSAGE);
+console.log(`Registrations are open: ${areRegistrationsOpen}`);
 
 // If the warning message is still there, check the number of available slots.
-if (!is_open) {
+if (!areRegistrationsOpen) {
   const dom = new JSDOM(content);
   const document = dom.window.document;
 
   const slots = document.querySelectorAll(`${SELECT_ELEMENT_ID} option`);
-  const available_slots = Array.from(slots).filter(
+  const availableSlots = Array.from(slots).filter(
     (option) => option.textContent.trim() !== PLACEHOLDER_OPTION_TEXT,
   );
 
-  if (available_slots.length <= 0) {
+  if (availableSlots.length <= 0) {
     console.log(`No slot available.`);
   } else {
-    console.log(`${available_slots.length} slot(s) available.`);
+    console.log(`${availableSlots.length} slot(s) available.`);
   }
 
-  is_open = available_slots.length > 0;
+  areRegistrationsOpen = availableSlots.length > 0;
 }
 
 // If registrations are not open, exit gracefully.
-if (!is_open) {
+if (!areRegistrationsOpen) {
   process.exit(0);
 }
 
